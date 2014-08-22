@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="externalLibs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/build/externalLibs/gdx-1.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/build/externalLibs/controlsfx-8.0.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/build/externalLibs/gdx-freetype-1.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/build/externalLibs/gdx-box2d-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/build/externalLibs/gdx-controllers-1.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/build/externalLibs/box2dlights-1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

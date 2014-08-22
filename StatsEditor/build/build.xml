@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<project name="StatsEditor" default="do-deploy" basedir="."  xmlns:fx="javafx:com.sun.javafx.tools.ant">
+	<target name="init-fx-tasks">
+		<path id="fxant">
+			<filelist>
+				<file name="${java.home}\..\lib\ant-javafx.jar"/>
+				<file name="${java.home}\lib\jfxrt.jar"/>
+				<file name="${basedir}"/>
+			</filelist>
+		</path>
+	
+		<taskdef resource="com/sun/javafx/tools/ant/antlib.xml"      
+			uri="javafx:com.sun.javafx.tools.ant"
+			classpathref="fxant"/>
+	</target>
+	<target name="setup-staging-area">
+		<delete dir="externalLibs" />
+		<delete dir="project" />
+		<delete dir="projectRefs" />
+		
+		<mkdir dir="externalLibs" />
+		
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\Harald\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-box2d\1.0.0\4e3e9721d888e440cfc541e011ada658ffac5d8a">
+				<filename name="gdx-box2d-1.0.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\Harald\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx\1.2.0\eb55d6eb1165daf6be23189767c19d811ca5eb36">
+				<filename name="gdx-1.2.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\Harald\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-controllers\1.2.0\30ca84734509b8981c6f5c6bcb870a4ed7460562">
+				<filename name="gdx-controllers-1.2.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\Harald\.gradle\caches\modules-2\files-2.1\com.badlogicgames.box2dlights\box2dlights\1.2\8b3baf8bd6d5fdf7052d9798977133f46a9e7a05">
+				<filename name="box2dlights-1.2.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\Dev\StatsEditor\lib">
+				<filename name="controlsfx-8.0.6.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\Harald\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-freetype\1.2.0\a9a2c9513bf0dc697e20e1eee35802e024972746">
+				<filename name="gdx-freetype-1.2.0.jar"/>	
+			</fileset>
+		</copy>
+		
+		<mkdir dir="project" />
+		<copy todir="project">
+			<fileset dir="D:\Dev\StatsEditor">
+				<include name="src/**" />
+			</fileset>
+		</copy>
+		
+		<mkdir dir="projectRefs" />
+		<copy todir="projectRefs">
+			<fileset dir="D:\Dev\Valkyrie">
+				<include name="Valkyrie-core\src/**" />
+			</fileset>
+		</copy>
+		<copy todir="projectRefs">
+			<fileset dir="D:\Dev\Java\repo\WilheRepo\Utility">
+				<include name="Lib\src/**" />
+			</fileset>
+		</copy>
+	</target>
+	<target name='do-compile'>
+		<delete dir="build" />
+		<mkdir dir="build/src" />
+		<mkdir dir="build/libs" />
+		<mkdir dir="build/classes" />
+	
+		<!-- Copy project-libs references -->
+		<copy todir="build/libs">
+			<fileset dir="externalLibs">
+				<include name="box2dlights-1.2.jar"/>
+				<include name="gdx-controllers-1.2.0.jar"/>
+				<include name="controlsfx-8.0.6.jar"/>
+				<include name="gdx-freetype-1.2.0.jar"/>
+				<include name="gdx-box2d-1.0.0.jar"/>
+				<include name="gdx-1.2.0.jar"/>
+			</fileset>
+		</copy>
+	
+		<!-- Copy project references -->
+		<copy todir="build/src">
+			<fileset dir="projectRefs/Lib/src">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	
+		<!-- Copy project sources itself -->
+		<copy todir="build/src">
+			<fileset dir="project/src">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	
+		<javac includeantruntime="false" source="1.8" target="1.8" srcdir="build/src" destdir="build/classes" encoding="Cp1252">
+			<classpath>
+				<fileset dir="build/libs">
+					<include name="*"/>
+				</fileset>
+			</classpath>
+		</javac>
+		
+		<!-- Copy over none Java-Files -->
+		<copy todir="build/classes">
+		<fileset dir="project/src">
+			<exclude name="**/*.java"/>
+		</fileset>
+		</copy>
+	
+		<copy todir="build/classes">
+			<fileset dir="projectRefs/Lib/src">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+		<copy todir="build/classes">
+			<fileset dir="projectRefs/Valkyrie-core/src">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+	
+	</target>
+	<target name="do-deploy" depends="setup-staging-area, do-compile, init-fx-tasks">
+		<delete file="dist"/>
+		<delete file="deploy" />
+		
+		<mkdir dir="dist" />
+		<mkdir dir="dist/libs" />
+		
+		<copy todir="dist/libs">
+			<fileset dir="externalLibs">
+				<include name="*" />
+			</fileset>
+		</copy>
+		
+		
+		<fx:resources id="appRes">
+			<fx:fileset dir="dist" includes="StatsEditor.jar"/>
+			<fx:fileset dir="dist" includes="libs/*"/>
+		    <fx:fileset dir="dist" includes="resources/**"/>
+		</fx:resources> 
+		
+		<fx:application id="fxApplication"
+			name="StatsEditor"
+			mainClass="com.smokebox.statsEditor.MainApp"
+			toolkit="fx"
+		/>
+	
+		<mkdir dir="build/classes/META-INF" />
+		
+		
+		
+		<fx:jar destfile="dist/StatsEditor.jar">
+			<fx:application refid="fxApplication"/>
+			<fileset dir="build/classes">
+			</fileset>
+			<fx:resources refid="appRes"/>
+			
+			<manifest>
+				<attribute name="Implementation-Vendor" value="Smokebox"/>
+				<attribute name="Implementation-Title" value="StatsEditor"/>
+				<attribute name="Implementation-Version" value="1.0"/>
+				<attribute name="JavaFX-Feature-Proxy" value="None"/>
+			</manifest>
+		</fx:jar>
+		
+	
+		<mkdir dir="deploy" />
+		<!-- Need to use ${basedir} because somehow the ant task is calculating the directory differently -->
+		<fx:deploy
+			embedJNLP="false"
+			extension="false"
+			includeDT="false"
+			offlineAllowed="true"
+			outdir="${basedir}/deploy"
+			outfile="StatsEditor" nativeBundles="exe"
+			updatemode="background" >
+	
+			<fx:info title="StatsEditor" vendor="Smokebox"/>
+			<fx:application refId="fxApplication"/>
+			<fx:resources refid="appRes"/>
+		</fx:deploy>
+		
+		
+	</target>
+</project>
