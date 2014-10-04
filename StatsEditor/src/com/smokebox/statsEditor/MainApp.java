@@ -184,7 +184,7 @@ public class MainApp extends Application {
 	        prefs.put("filePath", file.getPath());
 
 	        // Update the stage title.
-	        primaryStage.setTitle("Stats - " + file.getName());
+	        primaryStage.setTitle("Stats - " + file);
 	    } else {
 	        prefs.remove("filePath");
 

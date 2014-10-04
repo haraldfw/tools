@@ -1,4 +1,7 @@
 /StatsEditor/bin
+/StatsEditor/out
+/LevelEditor/out
+/LevelEditor/bin
 
 # Windows image file caches
 Thumbs.db

@@ -1,5 +1,6 @@
 package com.smokebox.statsEditor.view;
 
+import javafx.scene.control.*;
 import org.controlsfx.dialog.Dialogs;
 
 import com.smokebox.statsEditor.MainApp;
@@ -9,11 +10,6 @@ import com.smokebox.statsEditor.model.Stat;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
@@ -49,7 +45,7 @@ public class OwnerOverviewController {
 
     /**
      * Initializes the controller class. This method is 
-     * automatically called when the fxml-file isloaded.
+     * automatically called when the fxml-file is loaded.
      */
     @FXML
     private void initialize() {
@@ -165,19 +161,19 @@ public class OwnerOverviewController {
     }
     
     class EditingCellFloat extends TableCell<Stat, Float> {
-    	 
+
         private TextField textField;
-       
+
         public EditingCellFloat() {}
-       
+
         @Override
         public void startEdit() {
             super.startEdit();
-           
+
             if (textField == null) {
                 createTextField();
             }
-           
+
             setGraphic(textField);
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
             textField.selectAll();

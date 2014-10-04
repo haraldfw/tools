@@ -1,14 +1,12 @@
-package com.smokebox.statsEditor.view;
+package com.smokebox.levelEditor.view;
 
 
-import java.io.File;
-
+import com.smokebox.levelEditor.MainApp;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
-
 import org.controlsfx.dialog.Dialogs;
 
-import com.smokebox.statsEditor.MainApp;
+import java.io.File;
 
 /**
  * The controller for the root layout. The root layout provides the basic
@@ -35,7 +33,7 @@ public class RootLayoutController {
      */
     @FXML
     private void handleNew() {
-        mainApp.getOwnerData().clear();
+        // clear data
         mainApp.setOwnerFilePath(null);
     }
 
@@ -103,7 +101,7 @@ public class RootLayoutController {
     @FXML
     private void handleAbout() {
         Dialogs.create()
-            .title("StatsEditor")
+            .title("AddressApp")
             .masthead("About")
             .message("Author: Harald Floor Wilhelmsen. All rights reserved.")
             .showInformation();
