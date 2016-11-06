@@ -1,40 +1,42 @@
-/StatsEditor/bin
-/StatsEditor/out
-/LevelEditor/out
-/LevelEditor/bin
+# Gradle:
+**/.idea/*
 
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+## File-based project format:
+*.iws
 
-# Folder config file
-Desktop.ini
+## Plugin-specific files:
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# IntelliJ
+/**/out/
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+# mpeltonen/sbt-idea plugin
+.idea_modules/
 
-# =========================
-# Operating System Files
-# =========================
+# JIRA plugin
+atlassian-ide-plugin.xml
 
-# OSX
-# =========================
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
 
-.DS_Store
-.AppleDouble
-.LSOverride
+### Intellij Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
-# Icon must ends with two \r.
-Icon
-# Thumbnails
-._*
+/**/*.iml
 
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
+
+### Java ###
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
